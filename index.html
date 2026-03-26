@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Estudio - Comunicaciones Industriales</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --panel: #1e293b;
+      --panel-2: #334155;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --text: #e5e7eb;
+      --text-soft: #cbd5e1;
+      --muted: #94a3b8;
+      --line: #475569;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --maxw: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(180deg, #020617 0%, #0f172a 35%, #111827 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(2, 6, 23, 0.86);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .topbar {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand h1 {
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .brand p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .top-actions a,
+    .nav-buttons a,
+    .toc a {
+      text-decoration: none;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #2563eb);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      box-shadow: var(--shadow);
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .btn.secondary {
+      background: linear-gradient(135deg, #334155, #1e293b);
+      color: var(--text);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    main {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 26px 20px 80px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(34,197,94,0.08));
+      border: 1px solid rgba(56,189,248,0.2);
+      border-radius: 24px;
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .hero p {
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .hero .tags {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: var(--text-soft);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    .toc {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .toc h3 {
+      margin-bottom: 14px;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 12px 14px;
+      background: rgba(51, 65, 85, 0.35);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      color: var(--text);
+      border-radius: 12px;
+      transition: 0.2s ease;
+    }
+
+    .toc a:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .slide {
+      background: rgba(15, 23, 42, 0.84);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 24px;
+      padding: 34px 28px 24px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .slide-header {
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      padding-bottom: 14px;
+    }
+
+    .slide-number {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .slide h2 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .slide h3 {
+      font-size: 1.3rem;
+      color: #f8fafc;
+      margin-top: 18px;
+      margin-bottom: 10px;
+    }
+
+    .slide h4 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin-top: 14px;
+      margin-bottom: 8px;
+    }
+
+    .slide p {
+      color: var(--text-soft);
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+
+    .slide ul,
+    .slide ol {
+      padding-left: 22px;
+      margin: 10px 0 14px;
+      color: var(--text-soft);
+    }
+
+    .slide li {
+      margin-bottom: 7px;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(34,197,94,0.10));
+      border-left: 5px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .summary-box {
+      background: rgba(34, 197, 94, 0.10);
+      border: 1px solid rgba(34, 197, 94, 0.22);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .warning-box {
+      background: rgba(245, 158, 11, 0.10);
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .image-slot {
+      margin: 18px 0 10px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 2px dashed rgba(148, 163, 184, 0.3);
+      background: rgba(51, 65, 85, 0.20);
+    }
+
+    .image-slot img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 12px;
+      border-radius: 12px;
+      background: rgba(2,6,23,0.5);
+    }
+
+    .image-slot p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: center;
+      margin: 0;
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 14px 0;
+    }
+
+    .card {
+      background: rgba(51, 65, 85, 0.28);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    th, td {
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(56, 189, 248, 0.16);
+      color: #fff;
+    }
+
+    td {
+      background: rgba(30, 41, 59, 0.55);
+      color: var(--text-soft);
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148, 163, 184, 0.16);
+      flex-wrap: wrap;
+    }
+
+    .question-box {
+      background: rgba(37, 99, 235, 0.10);
+      border: 1px solid rgba(37, 99, 235, 0.24);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .test-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .test-item {
+      background: rgba(51,65,85,0.28);
+      border: 1px solid rgba(148,163,184,0.14);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    footer {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 10px 20px 50px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .two-cols {
+        grid-template-columns: 1fr;
+      }
+
+      .slide {
+        min-height: auto;
+      }
+
+      .slide h2 {
+        font-size: 1.6rem;
+      }
+
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-buttons a {
+        text-align: center;
+      }
+
+      .slide {
+        padding: 26px 18px 20px;
+      }
+
+      .hero {
+        padding: 28px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <h1>Guía de Estudio</h1>
+        <p>SCADA</p>
+      </div>
+
+      <div class="top-actions">
+        <a href="#inicio" class="btn secondary">Inicio</a>
+        <a href="#indice" class="btn secondary">Índice</a>
+        <a href="#slide-1" class="btn">Comenzar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <h2>Presentación interactiva para estudiar desde el navegador</h2>
+      <p>
+        Esta guía desarrolla los contenidos fundamentales sobre medios de transmisión,
+        tipos de comunicación industrial, codificación de datos, pirámide CIM y buses de campo.
+      </p>
+      
+
+      <div class="tags">
+        <span class="tag">Formato visual</span>
+        <span class="tag">Navegación por secciones</span>
+        <span class="tag">Preguntas tipo prueba</span>
+        <span class="tag">Cuadros resumen</span>
+        <span class="tag">Espacios para imágenes</span>
+      </div>
+    </section>
+
+    <section class="toc" id="indice">
+      <h3>Índice de contenidos</h3>
+      <div class="toc-grid">
+        <a href="#slide-1">1. Aprendizajes esperados</a>
+        <a href="#slide-2">2. Medios de transmisión</a>
+        <a href="#slide-3">3. Medios guiados y no guiados</a>
+        <a href="#slide-4">4. Comunicación industrial</a>
+        <a href="#slide-5">5. Paralelo y serie</a>
+        <a href="#slide-6">6. Serie síncrona y asíncrona</a>
+        <a href="#slide-7">7. Simplex, Half Duplex y Full Duplex</a>
+        <a href="#slide-8">8. Topologías multipunto</a>
+        <a href="#slide-9">9. Codificación analógica</a>
+        <a href="#slide-10">10. Codificación digital</a>
+        <a href="#slide-11">11. Pirámide CIM</a>
+        <a href="#slide-12">12. Buses de campo</a>
+        <a href="#slide-13">13. RS-232, RS-422 y RS-485</a>
+        <a href="#slide-14">14. Protocolos industriales</a>
+        <a href="#slide-15">15. Integración de conceptos</a>
+        <a href="#slide-16">16. Resumen general</a>
+        <a href="#slide-17">17. Autoevaluación</a>
+        <a href="#slide-18">18. Cierre</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-1">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 1</span>
+          <h2>Aprendizajes esperados</h2>
+        </div>
+
+        <p>Al estudiar esta guía, se espera que el estudiante logre identificar, comparar y aplicar los conceptos principales relacionados con las comunicaciones industriales.</p>
+
+        <ol>
+          <li>Reconocer los medios de transmisión de datos en sistemas de comunicación, a partir de su estructura.</li>
+          <li>Diferenciar los tipos de comunicación industrial según la forma en que se transmiten los datos.</li>
+          <li>Distinguir la codificación de datos según el tipo de modulación y el sincronismo.</li>
+          <li>Identificar los niveles de la pirámide de las comunicaciones industriales.</li>
+          <li>Describir las tecnologías de buses de campo, considerando norma física y protocolo.</li>
+        </ol>
+
+        <div class="highlight">
+          <strong>Idea central:</strong> en la industria no basta con “conectar cables”. También hay que comprender
+          cómo viaja la información, cómo se organiza, cómo se codifica y bajo qué reglas se intercambia.
+        </div>
+
+        <div class="summary-box">
+          <strong>Qué debes dominar al final:</strong>
+          <ul>
+            <li>Diferencia entre medio, norma física y protocolo.</li>
+            <li>Diferencia entre transmisión paralela y serie.</li>
+            <li>Características de RS-232, RS-422 y RS-485.</li>
+            <li>Ubicación de equipos en la pirámide CIM.</li>
+            <li>Uso general de Modbus, Profibus, Profinet, HART, AS-i y Wireless.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#indice" class="btn secondary">Volver al índice</a>
+        <a href="#slide-2" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-2">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 2</span>
+          <h2>Medios de transmisión de datos</h2>
+        </div>
+
+        <p>
+          Un medio de transmisión es el camino por el cual una señal viaja desde un emisor hacia un receptor.
+          En automatización industrial, este medio permite transportar variables de proceso, órdenes de control,
+          estados lógicos, alarmas y datos de configuración.
+        </p>
+
+        <h3>Elementos básicos de una comunicación</h3>
+        <div class="two-cols">
+          <div class="card">
+            <h4>Emisor</h4>
+            <p>Equipo que genera o envía la información. Puede ser un sensor, PLC, HMI, computador industrial o instrumento.</p>
+          </div>
+          <div class="card">
+            <h4>Receptor</h4>
+            <p>Equipo que recibe e interpreta la información transmitida.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Medio</h4>
+          <p>Canal por donde la señal se desplaza. Puede ser un cable, fibra óptica o el espacio libre en una comunicación inalámbrica.</p>
+        </div>
+
+        <div class="image-slot">
+          <img src="1.png" alt="Imagen 1 - Esquema básico emisor, medio y receptor">
+         
+        </div>
+
+        <div class="summary-box">
+          <strong>Resumen:</strong> sin medio de transmisión, el mensaje no puede desplazarse entre equipos. La elección del medio afecta alcance, ruido, velocidad, costo y confiabilidad.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-1" class="btn secondary">Sección anterior</a>
+        <a href="#slide-3" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-3">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 3</span>
+          <h2>Medios guiados y no guiados</h2>
+        </div>
+
+        <h3>Medios guiados</h3>
+        <p>Son aquellos en que la señal viaja por un soporte físico definido. Son muy usados en la industria porque entregan mayor control de la señal y mejor inmunidad al ruido.</p>
+        <ul>
+          <li><strong>Par trenzado:</strong> económico, común en RS-485 y Ethernet.</li>
+          <li><strong>Cable coaxial:</strong> más protegido frente a interferencias.</li>
+          <li><strong>Fibra óptica:</strong> transmite luz, tiene alto alcance e inmunidad electromagnética.</li>
+        </ul>
+
+        <h3>Medios no guiados</h3>
+        <p>La señal viaja por el espacio libre usando ondas electromagnéticas.</p>
+        <ul>
+          <li>Radiofrecuencia</li>
+          <li>Microondas</li>
+          <li>Infrarrojo</li>
+          <li>Wireless industrial</li>
+        </ul>
+
+        <table>
+          <tr>
+            <th>Aspecto</th>
+            <th>Guiados</th>
+            <th>No guiados</th>
+          </tr>
+          <tr>
+            <td>Soporte físico</td>
+            <td>Sí</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Inmunidad al ruido</td>
+            <td>Generalmente mayor</td>
+            <td>Generalmente menor</td>
+          </tr>
+          <tr>
+            <td>Uso industrial clásico</td>
+            <td>Muy frecuente</td>
+            <td>En crecimiento</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="2.png" alt="Imagen 2 - Comparación entre medios guiados y no guiados">
+          
+        </div>
+
+        <div class="warning-box">
+          <strong>Atención:</strong> en ambientes con motores, contactores, variadores y ruido electromagnético, la elección del medio es crítica.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-2" class="btn secondary">Sección anterior</a>
+        <a href="#slide-4" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-4">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 4</span>
+          <h2>Tipos de comunicación industrial</h2>
+        </div>
+
+        <p>Las comunicaciones industriales pueden clasificarse según varios criterios:</p>
+        <ul>
+          <li>Cómo se envían los bits: <strong>paralelo o serie</strong>.</li>
+          <li>Cómo se sincronizan: <strong>síncrona o asíncrona</strong>.</li>
+          <li>Cómo circula la información: <strong>simplex, half duplex o full duplex</strong>.</li>
+          <li>Cómo se conectan varios nodos: <strong>bus, estrella, anillo o malla</strong>.</li>
+        </ul>
+
+        <div class="highlight">
+          <strong>Punto clave:</strong> una misma red industrial puede combinar varias clasificaciones al mismo tiempo.
+          Por ejemplo: transmisión serie, asíncrona, half duplex, topología bus y protocolo Modbus RTU.
+        </div>
+
+        <div class="summary-box">
+          <strong>Ejemplo:</strong> un PLC conectado a varios variadores mediante RS-485 y Modbus RTU corresponde típicamente a una comunicación serial, multipunto y half duplex.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-3" class="btn secondary">Sección anterior</a>
+        <a href="#slide-5" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-5">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 5</span>
+          <h2>Transmisión de datos en paralelo y en serie</h2>
+        </div>
+
+        <div class="two-cols">
+          <div class="card">
+            <h3>Transmisión en paralelo</h3>
+            <p>Varios bits se envían al mismo tiempo por distintas líneas.</p>
+            <ul>
+              <li>Alta velocidad a corta distancia.</li>
+              <li>Requiere muchos conductores.</li>
+              <li>Más costosa y menos práctica en largas distancias.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Transmisión en serie</h3>
+            <p>Los bits se envían uno tras otro por una línea o un par de líneas.</p>
+            <ul>
+              <li>Menos cableado.</li>
+              <li>Más económica.</li>
+              <li>Muy usada en industria.</li>
+              <li>Adecuada para mayores distancias.</li>
+            </ul>
+          </div>
+        </div>
+
+        <table>
+          <tr>
+            <th>Aspecto</th>
+            <th>Paralelo</th>
+            <th>Serie</th>
+          </tr>
+          <tr>
+            <td>Cantidad de conductores</td>
+            <td>Alta</td>
+            <td>Baja</td>
+          </tr>
+          <tr>
+            <td>Distancia recomendable</td>
+            <td>Corta</td>
+            <td>Media / larga</td>
+          </tr>
+          <tr>
+            <td>Uso industrial moderno</td>
+            <td>Menor</td>
+            <td>Muy alto</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="3.png" alt="Imagen 3 - Transmisión paralela y serial">
+          
+        </div>
+
+        <div class="question-box">
+          <strong>Pregunta de estudio:</strong> ¿por qué la transmisión en serie resulta más conveniente en una planta industrial grande?
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-4" class="btn secondary">Sección anterior</a>
+        <a href="#slide-6" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-6">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 6</span>
+          <h2>Transmisión serie síncrona y asíncrona</h2>
+        </div>
+
+        <h3>Comunicación síncrona</h3>
+        <p>
+          Emisor y receptor comparten una referencia temporal o reloj. Esto permite saber con precisión cuándo leer cada bit.
+        </p>
+        <ul>
+          <li>Mayor eficiencia.</li>
+          <li>Menor sobrecarga de bits auxiliares.</li>
+          <li>Más exigente en sincronización.</li>
+        </ul>
+
+        <h3>Comunicación asíncrona</h3>
+        <p>
+          No existe un reloj compartido permanente. Cada dato se envía acompañado de bits de inicio y parada,
+          y a veces de paridad.
+        </p>
+        <ul>
+          <li>Más simple de implementar.</li>
+          <li>Muy usada en comunicaciones seriales industriales clásicas.</li>
+          <li>Tiene más sobrecarga que la síncrona.</li>
+        </ul>
+
+        <div class="highlight">
+          <strong>Trama asíncrona típica:</strong> bit de inicio + bits de datos + paridad opcional + bit o bits de parada.
+        </div>
+
+        <div class="image-slot">
+          <img src="4.png" alt="Imagen 4 - Trama serial asíncrona">
+         
+        </div>
+
+        <div class="summary-box">
+          <strong>Clave:</strong> síncrona = más eficiencia. Asíncrona = más simple.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-5" class="btn secondary">Sección anterior</a>
+        <a href="#slide-7" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-7">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 7</span>
+          <h2>Modos de comunicación punto a punto</h2>
+        </div>
+
+        <div class="two-cols">
+          <div class="card">
+            <h3>Simplex</h3>
+            <p>La información viaja en un solo sentido.</p>
+            <p>Ejemplo: un transmisor que solo envía datos.</p>
+          </div>
+
+          <div class="card">
+            <h3>Half Duplex</h3>
+            <p>La información puede ir en ambos sentidos, pero no al mismo tiempo.</p>
+            <p>Ejemplo: varios equipos comparten el mismo canal y se turnan.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Full Duplex</h3>
+          <p>La información viaja en ambos sentidos de manera simultánea.</p>
+          <p>Ejemplo: redes modernas o enlaces que transmiten y reciben al mismo tiempo.</p>
+        </div>
+
+        <table>
+          <tr>
+            <th>Modo</th>
+            <th>Sentido</th>
+            <th>Simultaneidad</th>
+          </tr>
+          <tr>
+            <td>Simplex</td>
+            <td>Un solo sentido</td>
+            <td>No aplica</td>
+          </tr>
+          <tr>
+            <td>Half Duplex</td>
+            <td>Dos sentidos</td>
+            <td>No simultánea</td>
+          </tr>
+          <tr>
+            <td>Full Duplex</td>
+            <td>Dos sentidos</td>
+            <td>Simultánea</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="5.png" alt="Imagen 5 - Simplex Half Duplex Full Duplex">
+         
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-6" class="btn secondary">Sección anterior</a>
+        <a href="#slide-8" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-8">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 8</span>
+          <h2>Topologías de redes multipunto</h2>
+        </div>
+
+        <h3>Bus de datos</h3>
+        <p>Todos los nodos se conectan a una línea principal común. Es muy usada en redes seriales industriales.</p>
+
+        <h3>Estrella</h3>
+        <p>Todos los nodos se conectan a un punto central, como un switch.</p>
+
+        <h3>Anillo</h3>
+        <p>Cada nodo se conecta con el siguiente, formando un circuito cerrado.</p>
+
+        <h3>Malla</h3>
+        <p>Un nodo puede conectarse con varios o todos los demás. Ofrece alta redundancia.</p>
+
+        <table>
+          <tr>
+            <th>Topología</th>
+            <th>Ventaja principal</th>
+            <th>Desventaja principal</th>
+          </tr>
+          <tr>
+            <td>Bus</td>
+            <td>Menor cableado</td>
+            <td>Dependencia del troncal</td>
+          </tr>
+          <tr>
+            <td>Estrella</td>
+            <td>Fácil diagnóstico</td>
+            <td>Depende del nodo central</td>
+          </tr>
+          <tr>
+            <td>Anillo</td>
+            <td>Buena continuidad con redundancia</td>
+            <td>Mayor complejidad</td>
+          </tr>
+          <tr>
+            <td>Malla</td>
+            <td>Alta robustez</td>
+            <td>Alto costo</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="6.png" alt="Imagen 6 - Topologías de red">
+          
+        </div>
+
+        <div class="summary-box">
+          <strong>Asociación práctica:</strong> redes seriales clásicas suelen usar bus; Ethernet industrial suele usar estrella.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-7" class="btn secondary">Sección anterior</a>
+        <a href="#slide-9" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-9">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 9</span>
+          <h2>Codificación en comunicaciones analógicas</h2>
+        </div>
+
+        <p>En las comunicaciones analógicas, la información se representa modificando una característica de la señal portadora.</p>
+
+        <div class="two-cols">
+          <div class="card">
+            <h3>ASK</h3>
+            <p><strong>Amplitude Shift Keying</strong></p>
+            <p>La información se representa modificando la amplitud.</p>
+          </div>
+
+          <div class="card">
+            <h3>FSK</h3>
+            <p><strong>Frequency Shift Keying</strong></p>
+            <p>La información se representa modificando la frecuencia.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>PSK</h3>
+          <p><strong>Phase Shift Keying</strong></p>
+          <p>La información se representa modificando la fase de la portadora.</p>
+        </div>
+
+        <table>
+          <tr>
+            <th>Modulación</th>
+            <th>Qué cambia</th>
+            <th>Robustez</th>
+          </tr>
+          <tr>
+            <td>ASK</td>
+            <td>Amplitud</td>
+            <td>Menor</td>
+          </tr>
+          <tr>
+            <td>FSK</td>
+            <td>Frecuencia</td>
+            <td>Media / alta</td>
+          </tr>
+          <tr>
+            <td>PSK</td>
+            <td>Fase</td>
+            <td>Alta</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="7.png" alt="Imagen 7 - Modulación ASK FSK PSK">
+          
+        </div>
+
+        <div class="question-box">
+          <strong>Pregunta de estudio:</strong> ¿cuál de estas modulaciones sería menos sensible al ruido que ASK?
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-8" class="btn secondary">Sección anterior</a>
+        <a href="#slide-10" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-10">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 10</span>
+          <h2>Codificación en comunicaciones digitales</h2>
+        </div>
+
+        <p>En comunicaciones digitales, la información binaria se representa por niveles eléctricos o cambios temporales específicos.</p>
+
+        <h3>Codificación polar</h3>
+        <p>Usa dos niveles eléctricos, por ejemplo uno positivo y uno negativo.</p>
+
+        <h3>Codificación bifase</h3>
+        <p>Usa transiciones dentro del período del bit. Facilita la sincronización.</p>
+
+        <h3>Codificación bipolar</h3>
+        <p>Usa tres niveles, normalmente positivo, cero y negativo.</p>
+
+        <table>
+          <tr>
+            <th>Codificación</th>
+            <th>Característica principal</th>
+            <th>Ventaja destacada</th>
+          </tr>
+          <tr>
+            <td>Polar</td>
+            <td>Dos niveles</td>
+            <td>Simplicidad</td>
+          </tr>
+          <tr>
+            <td>Bifase</td>
+            <td>Transición por bit</td>
+            <td>Buen sincronismo</td>
+          </tr>
+          <tr>
+            <td>Bipolar</td>
+            <td>Tres niveles</td>
+            <td>Mejor comportamiento de línea</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="8.png" alt="Imagen 8 - Codificación polar bifase bipolar">
+         
+        </div>
+
+        <div class="highlight">
+          <strong>Relación con el sincronismo:</strong> algunas codificaciones, como la bifase, facilitan que el receptor se mantenga sincronizado.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-9" class="btn secondary">Sección anterior</a>
+        <a href="#slide-11" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-11">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 11</span>
+          <h2>Pirámide de las comunicaciones industriales (CIM)</h2>
+        </div>
+
+        <p>La pirámide CIM organiza los sistemas industriales automatizados en niveles jerárquicos, desde el proceso físico hasta la gestión empresarial.</p>
+
+        <table>
+          <tr>
+            <th>Nivel</th>
+            <th>Nombre</th>
+            <th>Equipos / función</th>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Gestión empresarial</td>
+            <td>ERP, planificación, costos, logística</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Gestión de producción</td>
+            <td>MES, trazabilidad, coordinación de planta</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Supervisión</td>
+            <td>SCADA, HMI, estaciones de operador</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Control</td>
+            <td>PLC, controladores, automatización</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>Campo / proceso</td>
+            <td>Sensores, actuadores, válvulas, motores</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="9.png" alt="Imagen 9 - Pirámide CIM">
+         
+        </div>
+
+        <div class="summary-box">
+          <strong>Interpretación:</strong> los niveles inferiores trabajan más cerca del tiempo real y del proceso físico; los superiores se relacionan con supervisión, producción y gestión.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-10" class="btn secondary">Sección anterior</a>
+        <a href="#slide-12" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-12">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 12</span>
+          <h2>Tecnologías de buses de campo</h2>
+        </div>
+
+        <p>
+          Un bus de campo es un sistema de comunicación digital diseñado para interconectar dispositivos industriales
+          como sensores, actuadores, PLC, transmisores e interfaces.
+        </p>
+
+        <h3>Ventajas principales</h3>
+        <ul>
+          <li>Reducción del cableado punto a punto.</li>
+          <li>Mayor orden y escalabilidad.</li>
+          <li>Facilidad de diagnóstico y mantenimiento.</li>
+          <li>Intercambio de datos de proceso y configuración.</li>
+        </ul>
+
+        <div class="highlight">
+          <strong>Importante:</strong> un bus de campo combina dos ideas diferentes:
+          <br>1. La <strong>norma física</strong>, que define cómo viaja eléctricamente la señal.
+          <br>2. El <strong>protocolo</strong>, que define cómo se organizan los mensajes.
+        </div>
+
+        <div class="image-slot">
+          <img src="10.png" alt="Imagen 10 - Red de bus de campo">
+         
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-11" class="btn secondary">Sección anterior</a>
+        <a href="#slide-13" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-13">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 13</span>
+          <h2>Normas físicas: RS-232, RS-422 y RS-485</h2>
+        </div>
+
+        <h3>RS-232</h3>
+        <p>Comunicación serial clásica, punto a punto, adecuada para distancias cortas y con menor inmunidad al ruido.</p>
+
+        <h3>RS-422</h3>
+        <p>Usa transmisión diferencial, mejora el alcance y la inmunidad al ruido respecto de RS-232.</p>
+
+        <h3>RS-485</h3>
+        <p>Es una de las más usadas en automatización industrial. Es diferencial, robusta y apta para múltiples nodos.</p>
+
+        <table>
+          <tr>
+            <th>Norma</th>
+            <th>Enlace</th>
+            <th>Ruido</th>
+            <th>Multipunto</th>
+          </tr>
+          <tr>
+            <td>RS-232</td>
+            <td>Punto a punto</td>
+            <td>Baja inmunidad</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>RS-422</td>
+            <td>Diferencial</td>
+            <td>Alta inmunidad</td>
+            <td>Limitada</td>
+          </tr>
+          <tr>
+            <td>RS-485</td>
+            <td>Diferencial</td>
+            <td>Alta inmunidad</td>
+            <td>Sí</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="11.png" alt="Imagen 11 - RS232 RS422 RS485">
+         
+        </div>
+
+        <div class="summary-box">
+          <strong>Regla útil:</strong> cuando se busca una comunicación robusta, serial y multipunto en industria, RS-485 es una de las opciones más típicas.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-12" class="btn secondary">Sección anterior</a>
+        <a href="#slide-14" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-14">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 14</span>
+          <h2>Ejemplos de buses de campo y protocolos industriales</h2>
+        </div>
+
+        <h3>Modbus</h3>
+        <ul>
+          <li><strong>Modbus RTU:</strong> binario, eficiente, común sobre RS-485.</li>
+          <li><strong>Modbus ASCII:</strong> textual, más fácil de leer, menos eficiente.</li>
+          <li><strong>Modbus TCP:</strong> usa redes Ethernet y TCP/IP.</li>
+        </ul>
+
+        <h3>Otros protocolos</h3>
+        <ul>
+          <li><strong>Profibus:</strong> muy difundido en automatización industrial.</li>
+          <li><strong>Profinet:</strong> basado en Ethernet industrial.</li>
+          <li><strong>HART:</strong> comunicación digital sobre lazo analógico 4-20 mA.</li>
+          <li><strong>AS-i:</strong> orientado a sensores y actuadores simples.</li>
+          <li><strong>Wireless:</strong> soluciones inalámbricas industriales.</li>
+        </ul>
+
+        <table>
+          <tr>
+            <th>Protocolo / sistema</th>
+            <th>Uso general</th>
+          </tr>
+          <tr>
+            <td>Modbus RTU</td>
+            <td>Redes seriales industriales simples y robustas</td>
+          </tr>
+          <tr>
+            <td>Modbus ASCII</td>
+            <td>Comunicación legible en texto</td>
+          </tr>
+          <tr>
+            <td>Modbus TCP</td>
+            <td>Integración con redes Ethernet</td>
+          </tr>
+          <tr>
+            <td>Profibus</td>
+            <td>Automatización industrial clásica</td>
+          </tr>
+          <tr>
+            <td>Profinet</td>
+            <td>Ethernet industrial de alto desempeño</td>
+          </tr>
+          <tr>
+            <td>HART</td>
+            <td>Instrumentación de procesos</td>
+          </tr>
+          <tr>
+            <td>AS-i</td>
+            <td>Nivel de sensores y actuadores</td>
+          </tr>
+        </table>
+
+        <div class="image-slot">
+          <img src="12.png" alt="Imagen 12 - Protocolos industriales">
+         
+        </div>
+
+        <div class="warning-box">
+          <strong>No confundir:</strong> Modbus RTU es protocolo; RS-485 es norma física. No son lo mismo.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-13" class="btn secondary">Sección anterior</a>
+        <a href="#slide-15" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-15">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 15</span>
+          <h2>Integración de conceptos</h2>
+        </div>
+
+        <p>En un sistema industrial real, varios de estos conceptos aparecen combinados al mismo tiempo.</p>
+
+        <div class="highlight">
+          <strong>Ejemplo integrado:</strong><br>
+          Un sensor de temperatura se conecta a un PLC usando par trenzado. La red trabaja con RS-485,
+          protocolo Modbus RTU, topología bus y comunicación half duplex. El dato llega al PLC y luego
+          es mostrado en un SCADA.
+        </div>
+
+        <h3>Qué conceptos aparecen en el ejemplo</h3>
+        <ul>
+          <li><strong>Medio:</strong> par trenzado.</li>
+          <li><strong>Transmisión:</strong> serial.</li>
+          <li><strong>Modo:</strong> half duplex.</li>
+          <li><strong>Topología:</strong> bus.</li>
+          <li><strong>Norma física:</strong> RS-485.</li>
+          <li><strong>Protocolo:</strong> Modbus RTU.</li>
+          <li><strong>Nivel CIM:</strong> campo, control y supervisión.</li>
+        </ul>
+
+        <div class="summary-box">
+          <strong>Aprendizaje importante:</strong> la comprensión técnica real surge cuando el estudiante logra relacionar todos estos elementos en una instalación concreta.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-14" class="btn secondary">Sección anterior</a>
+        <a href="#slide-16" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-16">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 16</span>
+          <h2>Resumen general de estudio</h2>
+        </div>
+
+        <div class="two-cols">
+          <div class="card">
+            <h3>Bloque 1</h3>
+            <ul>
+              <li>Medios guiados y no guiados.</li>
+              <li>Paralelo y serie.</li>
+              <li>Síncrona y asíncrona.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Bloque 2</h3>
+            <ul>
+              <li>Simplex, half duplex, full duplex.</li>
+              <li>Bus, estrella, anillo y malla.</li>
+              <li>ASK, FSK y PSK.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="two-cols">
+          <div class="card">
+            <h3>Bloque 3</h3>
+            <ul>
+              <li>Codificación polar, bifase y bipolar.</li>
+              <li>Sincronismo de la información.</li>
+              <li>Pirámide CIM.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Bloque 4</h3>
+            <ul>
+              <li>RS-232, RS-422 y RS-485.</li>
+              <li>Modbus, Profibus, Profinet, HART, AS-i.</li>
+              <li>Diferencia entre norma física y protocolo.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="highlight">
+          <strong>Mapa mental mínimo:</strong><br>
+          medio → forma de transmisión → modo de intercambio → topología → norma física → protocolo → nivel CIM.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-15" class="btn secondary">Sección anterior</a>
+        <a href="#slide-17" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-17">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 17</span>
+          <h2>Autoevaluación y preguntas tipo prueba</h2>
+        </div>
+
+        <div class="test-grid">
+          <div class="test-item">
+            <strong>1.</strong> ¿Cuál es la diferencia principal entre medio guiado y no guiado?
+          </div>
+          <div class="test-item">
+            <strong>2.</strong> ¿Por qué la transmisión serial es más usada que la paralela en redes industriales?
+          </div>
+          <div class="test-item">
+            <strong>3.</strong> ¿Qué diferencia existe entre comunicación síncrona y asíncrona?
+          </div>
+          <div class="test-item">
+            <strong>4.</strong> ¿Qué significa que un sistema sea half duplex?
+          </div>
+          <div class="test-item">
+            <strong>5.</strong> ¿Qué topología utiliza un punto central?
+          </div>
+          <div class="test-item">
+            <strong>6.</strong> ¿Qué parámetro cambia en ASK, FSK y PSK?
+          </div>
+          <div class="test-item">
+            <strong>7.</strong> ¿Qué nivel de la pirámide CIM corresponde a SCADA?
+          </div>
+          <div class="test-item">
+            <strong>8.</strong> ¿Cuál es la diferencia entre RS-485 y Modbus RTU?
+          </div>
+          <div class="test-item">
+            <strong>9.</strong> ¿Por qué RS-485 es adecuada para ambientes industriales?</div>
+          <div class="test-item">
+            <strong>10.</strong> Mencione una aplicación típica de HART y una de Profinet.
+          </div>
+        </div>
+
+        <div class="question-box">
+          <strong>Actividad recomendada:</strong> intenta dibujar una red industrial sencilla con:
+          sensor + PLC + HMI + bus RS-485 + protocolo Modbus RTU + topología bus.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-16" class="btn secondary">Sección anterior</a>
+        <a href="#slide-18" class="btn">Siguiente sección</a>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-18">
+      <div>
+        <div class="slide-header">
+          <span class="slide-number">Sección 18</span>
+          <h2>Cierre de la guía</h2>
+        </div>
+
+        <p>
+          Las comunicaciones industriales constituyen la base del funcionamiento coordinado de los sistemas automatizados.
+          Comprender cómo se transmite la información, cómo se codifica y cómo se organiza en distintos niveles es esencial
+          para interpretar redes reales de automatización.
+        </p>
+
+        <p>
+          Esta guía puede ampliarse agregando diagramas, capturas, esquemas de buses, ejemplos de tramas y ejercicios resueltos.
+          La estructura ya quedó preparada para insertar imágenes numeradas y estudiar directamente desde el navegador.
+        </p>
+
+        <div class="summary-box">
+          <strong>Contenido cubierto:</strong>
+          <ul>
+            <li>Medios de transmisión</li>
+            <li>Comunicación industrial</li>
+            <li>Codificación analógica y digital</li>
+            <li>Pirámide CIM</li>
+            <li>Buses de campo, normas y protocolos</li>
+          </ul>
+        </div>
+
+        <div class="highlight">
+          <strong>Sugerencia de uso:</strong> agrega tus propias imágenes en los archivos
+          <strong>1.png, 2.png, 3.png...</strong> dentro de la misma carpeta del HTML para completar la presentación.
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="#slide-17" class="btn secondary">Sección anterior</a>
+        <a href="#inicio" class="btn">Volver al inicio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Guía de estudio interactiva · Comunicaciones Industriales y Transmisión de Datos
+  </footer>
+
+</body>
+</html>
